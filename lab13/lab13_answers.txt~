@@ -1,0 +1,23 @@
+Question 1: Describe the errors that occur when trying to assemble lab5_code.asm. Identify the cause of each error.
+
+ line 14: illegal operands for missing opcode  (x3000 is by itself without .ORIG)
+ line 16: instruction appears before .ORIG     (there is no .ORIG pseudo before code)
+ line 17: constant outside of allowed range    (x3010 can't be represented in 9 bits)
+ line 19: illegal operands for ADD             (there is an extra comma)
+ line 30: constant outside of allowed range    (x300F can't be represented in 9 bits)
+ line 32: label OUTERLOOP has already appeared (BRpz should be written as BRzp)
+ line 35: constant outside of allowed range    (x3011 can't be represented in 9 bits)
+ line 43: no .END directive found              (there is no .END after the code)
+
+Question 2: For each label in the code, write down the corresponding memory location. 
+
+ OUTERLOOP - x3004
+ INNERLOOP - x3005
+ INPUT - x300E
+
+Question 3: Between using labels and explicit memory locations/offsets, which
+one makes the most sense, and why?
+
+ Using labels makes the most sense because then if you find out later on that you
+ need to add more lines to the begginning of the code, you wont need to adjust the
+ offsets accordlingly like you would if you used explicit memory locations.

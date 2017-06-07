@@ -1,0 +1,15 @@
+// Symbol table
+// Scope level 0:
+//	Symbol Name       Page Address
+//	----------------  ------------
+//	LP_0              3002
+//	LP_1              3003
+//	LP_2              3008
+//	LP_3              3010
+//	LP_4              3014
+//	SKIP              301E
+//	MASK              3025
+//	SPAC              3026
+//	MEM1              3027
+//	FONT_DATA         3028
+
