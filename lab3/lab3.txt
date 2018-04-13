@@ -1,0 +1,132 @@
+
+Signed integer computation
+
+1. What is the largest value representable in 16-bit signed format? Smallest?
+
+	A.) largest = 22536, smallest = -32768.
+
+2. What is the result of the third computation? Why?
+
+	A.) 22536, there was overfow and the correct result could not be represeted with signed 16 bits.
+
+3. Why does the fourth computation overflow, but not the fifth?
+
+	A.) 32768 can not be reresented in signed 16 bits, but -32768 can be represented.
+
+4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in signed mode)?
+
+	A.) It count up to 32767, then go to -32768 and count up to 32767 again and repeat.
+
+Unsigned integer computation
+
+1. What is the largest value representable in 16-bit unsigned format? Smallest?
+
+	A.) largest = 65535, smallest = 0.
+
+2. What result do you get from the first computation? Why?
+
+	A.) since unsigned can not represent negative numbers, 99 is subtracted from 65536.
+
+3. Why doesn't the second or third computation overflow?
+
+	A.) the correct values ar less than 65536 and can be represented with unsigned 16 bits.
+
+4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in unsigned mode)?
+
+	A.) it would count u to 65536 then go to 0 and repeat.
+
+5. What are the advantages and disadvantages of unsigned formats (compared to signed formats)?
+
+	A.) unsigned formats can count to higher numbers with the same number of bits, but they can not represent negative numbers.
+
+Multiplication, division, modulus
+
+1. What result do you get in the second and third computations? Why?
+
+	A.) incorrect results, there is overflow.
+
+2. What results do you get from computations 4-7? Why? (Hint: can signed 16-bit encoding represent fractions?)
+
+	A.) the result is the integer with the decimals taken away, signed 16 bit encoding can not represent fractions.
+
+3. Does the result from computations 4-7 get rounded to the nearest integer? If not, what actually happens? Where might this behavior be useful? (Hint: what if you wanted to divide 11 candies between 3 people?)
+
+	A.) it does not get rounded, the decimals get chopped off.  it distributes a number without getting a fraction or using more then there is
+
+4. What does the modulus operator do for positive integers?
+
+	A.) outputs the remainder.
+
+5. What happens when you divide by 0? Modulus with 0? What happens to the binary-calculator program? Why might this be a good thing? (Hint: remember the discussion introduction?)
+
+	A.) it gets an error, because you can not divide by zero.
+
+6. Excluding division by 0, characterize the behavior of the modulus operation for positive and negative divisors and dividends (for a total of 2x2 = 4 combinations).
+
+	A.) the sign of the result of the modulus operation depnds on the sign of the dividend.
+
+Floating point
+
+1. Why is there an error in the fourth computation, but not the third? (Hint: how do you encode 0.25 and 0.3 in floating point?)
+
+	A.) 0.25 can be represented in 32 bit floating point, 0.3 can not. 
+
+2. How does the result of the fifth computation compare to the fourth? Explain. (Hint: look at the hex representations of the results. How does the floating point format handle negative numbers?)
+
+	A.) they have the same result, floating point has a seperate sign bit.
+
+3. Mathematically, would you expect the same results in computations 6 and 7? Do you observe this result experimentally? Explain. (Hint: try stepping through each computation)
+
+	A.) mathematically, they should have the same result, but it does not work experimentally.  0.0001 can not be represented in 32 floating point, but 0.9999 can be represented.
+
+4. What happens if you try computation 6 in double-precision (64-bit) floating-point mode? Why?
+
+	A.) it gets the correct answer.  64 bit floating point is precise enough to represent 9000.0001
+
+5. Why is there noticeable error in computation 8, but not 9? (Hint: think of multiplying floating point numbers like multiplying two numbers in scientific notation, how do you do it?)
+
+	A.) computation 8 requires the ability to represent 9000.01 which 32 floating point can not.  computation 9 requires only 9000.0000 to be shifted to the right twice which can be represented with 32 bit floating point.
+
+6. The root cause of the Ariane 5 rocket failure was isolated to the conversion of a floating point number, which stored the horizontal component of the rocket's velocity, to a 16-bit signed integer. What is the most likely cause of the failure? (Hint: this wasn't some small rounding error, the computed velocity was way off, causing the system to go haywire)
+
+	A.) there was overflow, and once the rockets horizontal velocity went over 32767 units, it started back at 0.
+
+Bitwise logic
+
+1. What are computations 1-3 doing? (what does a function that computes f(x) = x & 1 do?)
+
+	A.) outputs 1 if x is an odd number
+
+2. Continuing with the a light switch (or similar) analogy, what is computation 4 doing?
+
+	A.) adding the values together
+
+3. Why does computation 5 produce a nonzero result, but computation 6 produces zero?
+
+	A.) 193 and 128 share a binary bit of 1 in a certain place, but 65 and 128 do not share a binary bit of 1
+
+4. What is computation 7 doing? (what does a function that computes f(x) = x & ~1 do?)
+
+	A.) the binary code of 1 in unsigned 16 bits is 0000000000000001, so ~1 in unsigned 16 bit is 1111111111111110.  x45ff in binary is 100010111111111.  The sum of the values of the bits that are in both x45ff and ~1 is 17918.
+
+5. Compare the results of computation 8 and 9. Can you explain?
+
+	A.) They have the same result.  Computation 8 outputs the sum of the bit values where the binary code for x1234 and x5678 do not overlap.  Since Computation 9 outputs the result of the sum of the XOR'ed values when each of the numbers are NOT'ed, it will output the same as computation 9.
+
+--------------------------
+
+Additional problems
+
+Completion of these additional problems is not required for lab2 credit. However, problems similar to these may show up in a future exam.
+
+Bit shifting
+
+Signed 16 bit mode:
+1. Looking at the results from computations 1-5, do you see a pattern? What's going on? What does the left-shift operation effectively do?
+2. Given this definition of "<<", what would be the result from computation #6? Whats happening?
+3. Why is the result from computation #7 negative?
+4. Looking at the results from computations 8-11, what does the right-shift operation effectively do? (Hint: Try doing integer divisions with the same divisor)
+5. Thinking of the right-shift operation as a shift operation, there's a simple explanation for why the result of computation 12 is 0. What is it? (Hint: how does a computer encode decimal 10 in signed 16-bit?)
+
+Unsigned 16 bit mode:
+1. What are computations 1-3 doing? (hint: suppose each of the 16 bits bit represents a light switch that is either on or off)
